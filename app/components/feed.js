@@ -52,6 +52,11 @@ class Feed extends React.Component {
 
     componentWillMount() {
         this.refreshFeed();
+        this.refreshInterval = window.setInterval(() => this.refreshFeed(), 5*60*1000); // Refresh feed every 5 minutes
+    }
+
+    componentWillUnmount() {
+        window.clearInterval(this.refreshInterval);
     }
 
     refreshFeed() {
