@@ -4,7 +4,14 @@ function intersperse(arr, sep) {
     }
 
     return arr.slice(1).reduce(function(xs, x, i) {
-        return xs.concat([sep, x]);
+        var newItem;
+
+        if (typeof sep === "function")
+            newItem = sep();
+        else
+            newItem = sep;
+
+        return xs.concat([newItem, x]);
     }, [arr[0]]);
 }
 
