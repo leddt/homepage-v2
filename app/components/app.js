@@ -5,7 +5,7 @@ import Feed from "./feed";
 const styles = {
     column: {
         float: "left",
-        width: 400,
+        width: 500,
         margin: 20
     }
 }
