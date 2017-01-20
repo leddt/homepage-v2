@@ -17,7 +17,7 @@ const App = () => (
                 <Feed title="Hacker News" url="https://news.ycombinator.com/rss" />
             </div>
             <div style={styles.column}>
-                <Feed title="Slashdot" url="http://rss.slashdot.org/Slashdot/slashdot" />
+                <Feed title="Slashdot" url="http://rss.slashdot.org/Slashdot/slashdot" showDescription={true} />
             </div>
         </div>
     </MuiThemeProvider>

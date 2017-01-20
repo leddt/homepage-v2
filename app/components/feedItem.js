@@ -7,7 +7,7 @@ const FeedItem = (props) => {
     }
 
     return (
-        <ListItem key={props.item.link} primaryText={props.item.title} onClick={handleClick} />
+        <ListItem key={props.item.link} primaryText={props.item.title} onClick={handleClick} secondaryText={props.showDescription ? props.item.description : null} secondaryTextLines={2} />
     );
 };
 
