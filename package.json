@@ -1,0 +1,17 @@
+{
+  "name": "homepage",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "lodash": "^4.17.4"
+  },
+  "devDependencies": {
+    "webpack": "^2.2.0"
+  },
+  "scripts": {
+    "build": "webpack"
+  },
+  "author": "David Thibault",
+  "license": "MIT"
+}
