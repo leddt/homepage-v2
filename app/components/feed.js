@@ -17,7 +17,12 @@ class Feed extends React.Component {
 
     render() {
         let divIndex = 0;
-        const listItems = this.state.items.map((item) => <FeedItem key={item.link} item={item} showDescription={this.props.showDescription} />);
+        const listItems = this.state.items.map((item) => 
+            <FeedItem key={item.link} 
+                      item={item} 
+                      showDescription={this.props.showDescription}
+                      showCommentsButton={this.props.showCommentsButton} />);
+
         return (
             <Card>
                 <CardHeader title={this.props.title} />
