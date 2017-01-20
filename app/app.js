@@ -3,6 +3,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {Card, CardHeader, CardTitle, CardText} from "material-ui/Card";
 import {List, ListItem} from "material-ui/List";
 import Divider from "material-ui/Divider";
+import YQL from "./yql";
 
 const styles = {
     column: {
@@ -12,6 +13,9 @@ const styles = {
     }
 }
 
+YQL('select * from rss where url="https://news.ycombinator.com/rss"', function(data) {
+    console.log(data.query.results.item);
+});
 
 const App = () => (
     <MuiThemeProvider>
