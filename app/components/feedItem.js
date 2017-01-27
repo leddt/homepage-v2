@@ -7,7 +7,8 @@ const FeedItem = (props) => {
     function handleItemClick() {
         window.open(props.item.link);
     }
-    function handleCommentsClick() {
+    function handleCommentsClick(ev) {
+        ev.stopPropagation();
         window.open(props.item.comments);
     }
 
