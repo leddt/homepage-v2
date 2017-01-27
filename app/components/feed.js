@@ -31,6 +31,7 @@ class Feed extends React.Component {
         const listItems = this.state.items.map((item) => 
             <FeedItem key={item.link} 
                       item={item} 
+                      showUrl={this.props.showUrl}
                       showDescription={this.props.showDescription}
                       showCommentsButton={this.props.showCommentsButton} />);
 

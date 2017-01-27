@@ -21,12 +21,24 @@ const FeedItem = (props) => {
         )
     }
 
+    let description = null;
+    let lines = 0;
+
+    if (props.showUrl) {
+        description = props.item.link;
+        lines = 1;
+    }
+    else if (props.showDescription) {
+        description = props.item.description;
+        lines = 2;
+    }
+
     return (
         <ListItem key={props.item.link} 
                   primaryText={props.item.title} 
                   onClick={handleItemClick} 
-                  secondaryText={props.showDescription ? props.item.description : null} 
-                  secondaryTextLines={2}
+                  secondaryText={description} 
+                  secondaryTextLines={lines}
                   rightIconButton={getCommentsButton()} />
     );
 };
