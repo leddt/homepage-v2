@@ -1,8 +1,10 @@
+const path = require("path");
+
 module.exports = {
     entry: "./app/index.js",
     output: {
         filename: "bundle.js",
-        path: "./dist"
+        path: path.resolve(__dirname, "dist")
     },
     module: {
         loaders: [
