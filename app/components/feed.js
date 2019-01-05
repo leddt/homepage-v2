@@ -1,5 +1,6 @@
 import React from "react";
 import moment from "moment";
+import RSSParser from "rss-parser";
 
 import {Card, CardHeader} from "material-ui/Card";
 import {List} from "material-ui/List";
@@ -9,7 +10,6 @@ import RefreshIcon from "material-ui/svg-icons/action/update";
 
 import FeedItem from "./feedItem";
 
-import YQL from "../yql";
 import intersperse from "../intersperse";
 
 const styles = {
@@ -19,6 +19,8 @@ const styles = {
         top: 0
     }
 }
+
+const CORS_PROXY = "https://cors-anywhere.herokuapp.com/";
 
 class Feed extends React.Component {
     constructor(props) {
@@ -61,11 +63,12 @@ class Feed extends React.Component {
     }
 
     refreshFeed() {
-        YQL(`select * from rss where url="${this.props.url}"`, (data) => {
+        let parser = new RSSParser();
+        parser.parseURL(CORS_PROXY + this.props.url, (err, feed) => {
             this.setState({
                 timestamp: moment().format("HH:mm"),
-                items: data.query.results.item
-            });
+                items: feed.items
+            })
         });
     }
 }

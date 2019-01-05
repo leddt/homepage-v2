@@ -29,7 +29,7 @@ const FeedItem = (props) => {
         lines = 1;
     }
     else if (props.showDescription) {
-        description = props.item.description;
+        description = props.item.contentSnippet;
         lines = 2;
     }
 
