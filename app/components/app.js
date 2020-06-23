@@ -1,4 +1,6 @@
 import React from "react";
+import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Feed from "./feed";
 
@@ -10,8 +12,12 @@ const styles = {
     }
 }
 
+const theme = window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? getMuiTheme(darkBaseTheme) 
+    : null;
+
 const App = () => (
-    <MuiThemeProvider>
+    <MuiThemeProvider muiTheme={theme}>
         <div>
             <div style={styles.column}>
                 <Feed title="Hacker News" url="https://news.ycombinator.com/rss" showCommentsButton={true} showUrl={true} />
