@@ -64,13 +64,39 @@ class Feed extends React.Component {
 
     refreshFeed() {
         let parser = new RSSParser();
-        parser.parseURL(CORS_PROXY + this.props.url, (err, feed) => {
-            this.setState({
-                timestamp: moment().format("HH:mm"),
-                items: feed.items
+
+        if (this.props.url) {
+            parser.parseURL(CORS_PROXY + this.props.url, (err, feed) => {
+                this.setState({
+                    timestamp: moment().format("HH:mm"),
+                    items: feed.items
+                })
+            });
+        } else if (this.props.urls) {
+            var promises = Object.keys(this.props.urls).map(source => 
+                parser
+                    .parseURL(CORS_PROXY + this.props.urls[source])
+                    .then(feed => ({feed, source}))
+            );
+
+            Promise.all(promises).then(feeds => {
+                this.setState({
+                    timestamp: moment().format("HH:mm"),
+                    items: feeds.flatMap(x => x.feed.items.map(i => ({...i, source: x.source}))).sort(compareFeedItems)
+                })
             })
-        });
+        }
     }
+}
+
+function fixGogPubDate(pubDate) {
+    return pubDate.replace("EEST", "EST");
+}
+function compareFeedItems(a, b) {
+    var dateA = moment(fixGogPubDate(a.pubDate));
+    var dateB = moment(fixGogPubDate(b.pubDate));
+
+    return dateB - dateA;
 }
 
 export default Feed;

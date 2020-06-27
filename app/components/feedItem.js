@@ -1,5 +1,6 @@
 import React from "react";
 import {ListItem} from "material-ui/List";
+import Avatar from 'material-ui/Avatar';
 import IconButton from "material-ui/IconButton";
 import CommentIcon from "material-ui/svg-icons/communication/comment";
 
@@ -29,7 +30,7 @@ const FeedItem = (props) => {
         lines = 1;
     }
     else if (props.showDescription) {
-        description = props.item.contentSnippet;
+        description = props.item.contentSnippet || stripHtml(props.item["content:encoded"]);
         lines = 2;
     }
 
@@ -39,8 +40,13 @@ const FeedItem = (props) => {
                   onClick={handleItemClick} 
                   secondaryText={description} 
                   secondaryTextLines={lines}
-                  rightIconButton={getCommentsButton()} />
+                  rightIconButton={getCommentsButton()}
+                  leftAvatar={props.item.source ? <Avatar style={{fontSize: "0.7em"}}>{props.item.source}</Avatar> : null} />
     );
 };
+
+function stripHtml(text) {
+    return text.replace(/<[^>]+>/g, " ")
+}
 
 export default FeedItem;

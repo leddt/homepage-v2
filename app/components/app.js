@@ -25,6 +25,9 @@ const App = () => (
             <div style={styles.column}>
                 <Feed title="Slashdot" url="http://rss.slashdot.org/Slashdot/slashdot" showDescription={true} />
             </div>
+            <div style={styles.column}>
+                <Feed title="Games" urls={{Steam: "https://store.steampowered.com/feeds/news.xml", GOG: "https://www.gog.com/frontpage/rss", Humble: "https://blog.humblebundle.com/feed/"}} showDescription={true} />
+            </div>
         </div>
     </MuiThemeProvider>
 );
