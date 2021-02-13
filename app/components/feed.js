@@ -20,7 +20,7 @@ const styles = {
     }
 }
 
-const CORS_PROXY = "https://cors-anywhere.herokuapp.com/";
+const CORS_PROXY = "https://api.allorigins.win/raw?url=";
 
 class Feed extends React.Component {
     constructor(props) {
