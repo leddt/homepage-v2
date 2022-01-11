@@ -64,9 +64,10 @@ class Feed extends React.Component {
 
     refreshFeed() {
         let parser = new RSSParser();
+        let t = new Date().getTime();
 
         if (this.props.url) {
-            parser.parseURL(CORS_PROXY + this.props.url, (err, feed) => {
+            parser.parseURL(CORS_PROXY + this.props.url + `&t=${t}`, (err, feed) => {
                 this.setState({
                     timestamp: moment().format("HH:mm"),
                     items: feed.items
@@ -75,7 +76,7 @@ class Feed extends React.Component {
         } else if (this.props.urls) {
             var promises = Object.keys(this.props.urls).map(source => 
                 parser
-                    .parseURL(CORS_PROXY + this.props.urls[source])
+                    .parseURL(CORS_PROXY + this.props.urls[source] + `&t=${t}`)
                     .then(feed => ({feed, source}))
             );
 
