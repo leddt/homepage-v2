@@ -23,22 +23,27 @@ jobs:
         cache: 'npm'
     - run: npm ci
     - run: npm run release
+    - name: Copy bundle.js
+      uses: canastro/copy-action@0.0.2
+      with:
+        source: dist/bundle.js
+        target: site/dist/bundle.js
     - name: Copy index.html
       uses: canastro/copy-action@0.0.2
       with:
         source: index.html
-        target: dist/index.html
+        target: site/index.html
     - name: Copy favicon.png
       uses: canastro/copy-action@0.0.2
       with:
         source: favicon.png
-        target: dist/favicon.png
+        target: site/favicon.png
     - name: GH Pages deploy
       uses: Cecilapp/GitHub-Pages-deploy@3.2.1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         email: thibault.david@gmail.com
-        build_dir: dist
+        build_dir: site
         branch: gh-pages
         cname: homepage.leddt.com
