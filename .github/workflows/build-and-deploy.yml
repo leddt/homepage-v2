@@ -23,7 +23,7 @@ jobs:
         cache: 'npm'
     - run: npm ci
     - run: npm run release
-    - run: mkdir site/dist
+    - run: mkdir -p site/dist
     - run: cp dist/bundle.js site/dist/bundle.js
     - run: cp index.html site/index.html
     - run: cp favicon.png site/favicon.png
