@@ -23,21 +23,10 @@ jobs:
         cache: 'npm'
     - run: npm ci
     - run: npm run release
-    - name: Copy bundle.js
-      uses: canastro/copy-action@0.0.2
-      with:
-        source: dist/bundle.js
-        target: site/dist/bundle.js
-    - name: Copy index.html
-      uses: canastro/copy-action@0.0.2
-      with:
-        source: index.html
-        target: site/index.html
-    - name: Copy favicon.png
-      uses: canastro/copy-action@0.0.2
-      with:
-        source: favicon.png
-        target: site/favicon.png
+    - run: mkdir site/dist
+    - run: cp dist/bundle.js site/dist/bundle.js
+    - run: cp index.html site/index.html
+    - run: cp favicon.png site/favicon.png
     - name: GH Pages deploy
       uses: Cecilapp/GitHub-Pages-deploy@3.2.1
       env:
