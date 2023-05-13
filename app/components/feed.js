@@ -70,7 +70,10 @@ class Feed extends React.Component {
             parser.parseURL(CORS_PROXY + this.props.url + `&t=${t}`, (err, feed) => {
                 this.setState({
                     timestamp: moment().format("HH:mm"),
-                    items: feed.items
+                    items: feed.items.map(i => ({
+                        ...i,
+                        title: this.props.decodeTitle ? decodeHtml(i.title) : i.title,
+                    }))
                 })
             });
         } else if (this.props.urls) {
@@ -79,15 +82,25 @@ class Feed extends React.Component {
                     .parseURL(CORS_PROXY + this.props.urls[source] + `&t=${t}`)
                     .then(feed => ({feed, source}))
             );
-
             Promise.all(promises).then(feeds => {
                 this.setState({
                     timestamp: moment().format("HH:mm"),
-                    items: feeds.flatMap(x => x.feed.items.map(i => ({...i, source: x.source}))).sort(compareFeedItems)
+                    items: feeds.flatMap(x => x.feed.items.map(i => ({
+                        ...i, 
+                        title: this.props.decodeTitle ? decodeHtml(i.title) : i.title,
+                        source: x.source
+                    }))).sort(compareFeedItems)
                 })
             })
         }
     }
+}
+
+function decodeHtml(html) {
+    console.log(html);
+    var txt = document.createElement("textarea");
+    txt.innerHTML = html;
+    return txt.value;
 }
 
 function fixGogPubDate(pubDate) {
